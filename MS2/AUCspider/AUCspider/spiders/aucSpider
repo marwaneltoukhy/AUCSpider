@@ -1,0 +1,14 @@
+import scrapy
+from ..items import AucspiderItem
+
+
+class AUCSpider(scrapy.Spider):
+    name = "auc"
+    start_urls = [
+        'http://catalog.aucegypt.edu/content.php?catoid=36&navoid=1738'
+    ]
+
+    def parse(self, response):
+        items = AucspiderItem()
+        title = response.css('h3.s::text').extract()
+        yield title
